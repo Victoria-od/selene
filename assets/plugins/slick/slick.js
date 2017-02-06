@@ -479,7 +479,7 @@
     Slick.prototype.buildDots = function() {
 
         var _ = this,
-            i, dot;
+        i, dot;
 
         if (_.options.dots === true && _.slideCount > _.options.slidesToShow) {
 
@@ -488,7 +488,7 @@
             dot = $('<ul />').addClass(_.options.dotsClass);
 
             for (i = 0; i <= _.getDotCount(); i += 1) {
-                dot.append($('<li />').append(_.options.customPaging.call(this, _, i)));
+                dot.append($('<li />').append(_.options.customPaging.call(this, _, i )));
             }
 
             _.$dots = dot.appendTo(_.options.appendDots);

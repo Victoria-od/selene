@@ -69,30 +69,23 @@ $(document).ready(function(){
 	/*swith end*/
 
 	/*slider asNavFor end*/
-
-	/*isotope start*/
-	$('.main-iso').isotope({
-		itemSelector: '.item',
-		layoutMode: 'fitRows'
+/*tabs work start*/
+	$(document).on('click', '.tabs-menu li', function() {
+		$('.all_tabs .active').removeClass('active');
+		$(this).addClass('active');
+		var tab = $(this).attr('data-tab');
+		$('.tab-content[data-tab = '+ tab +']').addClass('active');
 	});
+/*tabs work end*/
 
-
-/*MODAL WINDOW START*/
-$(document).on('click', '[data-toggle="modal"]', function(e){
-
-	e.preventDefault();
-	var el_selector = $(this).attr('data-target');
-	$(el_selector).fadeIn();
-
-});
-
-$(document).on('click', '.modal .close-modal', function(e){
-
-	e.preventDefault();
-	$(this).closest('.modal').fadeOut();
-
-});
-/*MODAL WINDOW END*/
+/*tabs contact start*/
+	$(document).on('click', '.contact-tabs-menu li', function() {
+		$('.contact-tabs .active').removeClass('active');
+		$(this).addClass('active');
+		var tab = $(this).attr('data-tab');
+		$('.contact-tab-content[data-tab = '+ tab +']').addClass('active');
+	});
+/*tabs contact end*/
 
 /*to check the form start*/
 function isStrEmpty(str){
@@ -114,13 +107,16 @@ $(document).on('click', '#submit-login', function(e){
 	e.preventDefault();
 
 	var user_name_input     = $('#user-name'), 
-	user_password_input    = $('#user-password');
+	user_phone_input    = $('#user-phone'),
+	user_email_input     = $('#user-email');
 
 	var user_name        	= user_name_input.val().trim(), 
-	user_password      	= user_password_input.val().trim(); 
+	user_phone      	= user_phone_input.val().trim(),
+	user_email       	= user_email_input.val().trim(); 
 
 	user_name_input.val(user_name);
-	user_password_input.val(user_password);
+	user_phone_input.val(user_phone);
+	user_email_input.val(user_email);
 
 	var validated = true;
 	$('.error-msg').html('');
@@ -132,19 +128,27 @@ $(document).on('click', '#submit-login', function(e){
 		user_name_input.removeClass('error');
 	}
 
-	if ( isStrEmpty(user_password) ){
-		user_password_input.addClass('error');
+	if ( isStrEmpty(user_phone) ){
+		user_phone_input.addClass('error');
 		validated = false;
 	} else {
-		user_password_input.removeClass('error');
+		user_phone_input.removeClass('error');
+	}
+
+	if ( isStrEmpty(user_email) ){
+		user_email_input.addClass('error');
+		validated = false;
+	} else {
+		user_email_input.removeClass('error');
 	}
 
 	if (validated){
 		console.log('User Name: ' + user_name);
-		console.log('Your password is OK');
-		$(this).html('Login');
+		console.log('Your Phone: ' + user_phone);
+		console.log('User Email: ' + user_email);
+		$(this).html('SENT');
 	} else {
-		$('.error-msg').html('<p style="color: #731414; font-weight: 400;">You have not completed all fields</p>');
+		$('.error-msg').html('<p style="color: #97d1eb; font-weight: 400;">You have not completed all fields</p>');
 	}
 
 });
@@ -152,4 +156,6 @@ $(document).on('click', '#submit-login', function(e){
 /*to check the form end*/
 
 });
+
+
 
